@@ -19,9 +19,18 @@ export const api = {
 export const DataProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
+  const [last, setLast] = useState(null);
+  // ajout de la const last et setLast
+
   const getData = useCallback(async () => {
     try {
-      setData(await api.loadData());
+      const eventData = await api.loadData();
+      setData(eventData);
+      // recuperation des données de l'api dans une const eventData
+
+      const lastEvent = eventData.events[eventData.events.length - 1];
+      setLast(lastEvent);
+      // ajout de la const lastEvent qui recupere le dernier evenement de la liste
     } catch (err) {
       setError(err);
     }
@@ -37,7 +46,8 @@ export const DataProvider = ({ children }) => {
       value={{
         data,
         error,
-        // faire en sorte d'ajouter last en value
+        last,
+        // ajout de last dans les valeurs
       }}
     >
       {children}
