@@ -27,9 +27,11 @@ export const DataProvider = ({ children }) => {
       const eventData = await api.loadData();
       setData(eventData);
       // recuperation des données de l'api dans une const eventData
+      if (eventData.events) {
+        const lastEvent = eventData.events[eventData.events.length - 1];
+        setLast(lastEvent);
+      }
 
-      const lastEvent = eventData.events[eventData.events.length - 1];
-      setLast(lastEvent);
       // ajout de la const lastEvent qui recupere le dernier evenement de la liste
     } catch (err) {
       setError(err);
