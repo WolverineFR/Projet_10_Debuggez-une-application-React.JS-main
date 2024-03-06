@@ -14,11 +14,12 @@ const Slider = () => {
   const nextCard = () => {
     if (byDateDesc) {
       setTimeout(
-        () => setIndex(index < byDateDesc.length ? index + 1 : 0),
+        () => setIndex(index < byDateDesc.length - 1 ? index + 1 : 0),
         5000
       );
     }
   };
+  // correction du bug de l'index image blanche en precisant index < bydatedesc.lenghth - 1 pour verifier la fin de l'index
 
   useEffect(() => {
     nextCard();
